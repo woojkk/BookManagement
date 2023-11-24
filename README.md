@@ -2,11 +2,14 @@
 
 ## 개발 환경
 ```
+언어 : Java
+프레임워크 : Spring Boot
 통합개발환경(IDE) : IntelliJ
 JDK 버전 : JDK 17
 DB : Mysql
+ORM : Mybatis
 빌드 툴 : Gradle
-관리 툴 : GitHub
+버전 관리 툴 : GitHub
 ```
 
 ## 사용기술
@@ -43,5 +46,5 @@ DB : Mysql
 
 
 ## ERD
+![BookManagement ERD](https://github.com/woojkk/BookManagement/assets/122269418/e2e40e83-ad5a-462a-8b82-ed0f34bbd7dc)
 
-![BookManagement ERD.png](BookManagement%20ERD.png)
