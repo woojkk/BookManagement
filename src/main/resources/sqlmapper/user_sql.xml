@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
+<mapper namespace="com.woojkk.bookmanagement.mapper.UserMapper">
+  <insert id="save" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into user (nickname,password, contact_number, role)
+    values (#{nickname}, #{password}, #{contactNumber}, #{role})
+  </insert>
 
+  <select id="nicknameCheck" resultType="int">
+    select count(nickname)
+    from user
+    where nickname = #{nickname}
+  </select>
 </mapper>
