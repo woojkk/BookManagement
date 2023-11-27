@@ -1,7 +1,11 @@
 package com.woojkk.bookmanagement.service;
 
+import com.woojkk.bookmanagement.config.AES256Util;
+import com.woojkk.bookmanagement.config.JwtProvider;
 import com.woojkk.bookmanagement.dto.UserDto;
+import com.woojkk.bookmanagement.entity.User;
 import com.woojkk.bookmanagement.mapper.UserMapper;
+import com.woojkk.bookmanagement.vo.LoginForm;
 import java.util.regex.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,17 +18,12 @@ public class UserService {
       Pattern.compile("^01([0|1|6|7|8|9])-?(\\d{3,4})-?(\\d{4})$");
 
   private final UserMapper userMapper;
+  private final JwtProvider jwtProvider;
 
   @Transactional
   public void signup(UserDto userDto) {
 
-    if (userDto.getNickname() == null || userDto.getPassword() == null
-        || userDto.getContactNumber() == null) {
-      throw new NullPointerException("필수 입력사항을 모두 입력해주세요.");
-    }
-    boolean duplicatedId = isDuplicatedNickname(userDto.getNickname());
-
-    if (duplicatedId) {
+    if (isDuplicatedNickname(userDto.getNickname())) {
       throw new IllegalStateException("중복된 닉네임입니다.");
     }
 
@@ -32,7 +31,15 @@ public class UserService {
       throw new IllegalArgumentException("전화번호 형식이 잘못되었습니다.");
     }
 
-    int saveCount = userMapper.save(userDto);
+    UserDto encryptedUserDto = UserDto.builder()
+        .nickname(userDto.getNickname())
+        .password(AES256Util.encrypt(userDto.getPassword()))
+        .contactNumber(userDto.getContactNumber())
+        .role(userDto.isRole())
+        .build();
+
+    int saveCount = userMapper.save(encryptedUserDto);
+
 
     if (saveCount != 1) {
       throw new IllegalStateException("회원가입 메서드를 확인해주세요.\n" + "UserDto : " + userDto);
@@ -41,5 +48,16 @@ public class UserService {
 
   public boolean isDuplicatedNickname(String nickname) {
     return userMapper.nicknameCheck(nickname) == 1;
+  }
+
+  public String login(LoginForm loginForm) {
+
+    LoginForm newLoginForm = LoginForm.builder()
+        .nickname(loginForm.getNickname())
+        .password(AES256Util.encrypt(loginForm.getPassword())).build();
+
+    User user = userMapper.login(newLoginForm);
+
+    return jwtProvider.createToken(user.getNickname(), user.getUserId());
   }
 }
