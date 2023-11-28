@@ -3,7 +3,6 @@ package com.woojkk.bookmanagement.service;
 import com.woojkk.bookmanagement.config.AES256Util;
 import com.woojkk.bookmanagement.config.JwtProvider;
 import com.woojkk.bookmanagement.dto.UserDto;
-import com.woojkk.bookmanagement.entity.User;
 import com.woojkk.bookmanagement.mapper.UserMapper;
 import com.woojkk.bookmanagement.vo.LoginForm;
 import java.util.regex.Pattern;
@@ -42,7 +41,7 @@ public class UserService {
 
 
     if (saveCount != 1) {
-      throw new IllegalStateException("회원가입 메서드를 확인해주세요.\n" + "UserDto : " + userDto);
+      throw new IllegalStateException("회원가입 중 오류가 발생하였습니다.");
     }
   }
 
@@ -56,8 +55,8 @@ public class UserService {
         .nickname(loginForm.getNickname())
         .password(AES256Util.encrypt(loginForm.getPassword())).build();
 
-    User user = userMapper.login(newLoginForm);
+    UserDto userDto = userMapper.login(newLoginForm);
 
-    return jwtProvider.createToken(user.getNickname(), user.getUserId());
+    return jwtProvider.createToken(userDto.getNickname(), userDto.getUserId());
   }
 }
