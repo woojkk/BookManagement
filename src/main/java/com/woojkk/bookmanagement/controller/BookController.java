@@ -2,6 +2,7 @@ package com.woojkk.bookmanagement.controller;
 
 import com.woojkk.bookmanagement.dto.BookDto;
 import com.woojkk.bookmanagement.service.BookService;
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,9 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BookController {
   private final BookService bookService;
 
-  /**
-   * 도서 등록
-   */
+  @Operation(summary = "도서 등록")
   @PostMapping("/book")
   @ResponseStatus(HttpStatus.CREATED)
   public void registrationBook(@RequestHeader(name = "X-AUTH-TOKEN") String token,
@@ -31,9 +30,7 @@ public class BookController {
     bookService.registrationBook(token, bookDto);
   }
 
-  /**
-   * 도서 수정
-   */
+  @Operation(summary = "도서 수정")
   @PutMapping("/book/{bookId}")
   public void updatedBook(@RequestHeader(name = "X-AUTH-TOKEN") String token,
                           @PathVariable Long bookId,
@@ -41,18 +38,14 @@ public class BookController {
     bookService.updateBook(token, bookId, bookDto);
   }
 
-  /**
-   * 도서 삭제
-   */
+  @Operation(summary = "도서 삭제")
   @DeleteMapping("/book/{bookId}")
   public void deleteBook(@RequestHeader(name = "X-AUTH-TOKEN") String token,
       @PathVariable Long bookId) {
     bookService.deleteBook(token, bookId);
   }
 
-  /**
-   * 도서 조회
-   */
+  @Operation(summary = "도서 조회")
   @GetMapping("/book/search")
   public List<BookDto> searchAllBook() {
     return bookService.searchAllBook();
