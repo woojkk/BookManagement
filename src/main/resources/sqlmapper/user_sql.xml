@@ -13,7 +13,13 @@
     where nickname = #{nickname}
   </select>
 
-  <select id="login" resultType="com.woojkk.bookmanagement.entity.User">
+  <select id="checkRole" resultType="com.woojkk.bookmanagement.dto.UserDto">
+    select *
+    from user
+    where user_id = #{userId}
+  </select>
+
+  <select id="login" resultType="com.woojkk.bookmanagement.dto.UserDto">
     select *
     from user
     where nickname = #{nickname}
