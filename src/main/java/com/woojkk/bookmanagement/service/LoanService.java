@@ -48,7 +48,7 @@ public class LoanService {
     }
   }
 
-  public List<LoanHistoryDto> loanHistoryAndCount(String token, Long bookId) {
+  public List<LoanHistoryDto> loanHistory(String token, Long bookId) {
     return loanMapper.loanHistory(bookId);
   }
 }
