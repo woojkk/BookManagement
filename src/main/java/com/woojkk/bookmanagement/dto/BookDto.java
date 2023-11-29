@@ -9,8 +9,8 @@ import lombok.Getter;
 @Builder
 public class BookDto {
   private Long bookId;
-  private String genre;
   private String bookName;
   private String author;
+  private String genre;
   private int publicationYear;
 }

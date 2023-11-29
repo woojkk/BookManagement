@@ -6,6 +6,7 @@ import com.woojkk.bookmanagement.dto.UserDto;
 import com.woojkk.bookmanagement.mapper.BookMapper;
 import com.woojkk.bookmanagement.mapper.UserMapper;
 import com.woojkk.bookmanagement.vo.UserVo;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,13 +29,13 @@ public class BookService {
       throw new RuntimeException("권한이 없습니다.");
     }
 
-    int checkAuthorAndBookName = bookMapper.checkAuthorAndBookName(bookDto.getAuthor(), bookDto.getBookName());
+    int checkAuthorAndBookName = bookMapper.findByAuthorAndBookName(bookDto.getAuthor(), bookDto.getBookName());
 
     if (checkAuthorAndBookName >= 1) {
-      throw new IllegalStateException("이미 등록된 책입니다.");
+      throw new IllegalStateException("이미 등록된 도서입니다.");
     }
 
-    int registrationCount = bookMapper.registration(bookDto);
+    int registrationCount = bookMapper.saveBook(bookDto);
 
     if (registrationCount != 1) {
       throw new IllegalStateException("도서 등록 중 오류가 발생하였습니다.");
@@ -80,5 +81,9 @@ public class BookService {
     }
 
     bookMapper.deleteBook(bookId);
+  }
+
+  public List<BookDto> searchAllBook() {
+    return bookMapper.findAllBook();
   }
 }

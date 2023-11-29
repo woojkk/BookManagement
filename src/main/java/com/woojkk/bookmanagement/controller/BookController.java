@@ -2,9 +2,11 @@ package com.woojkk.bookmanagement.controller;
 
 import com.woojkk.bookmanagement.dto.BookDto;
 import com.woojkk.bookmanagement.service.BookService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -46,5 +48,13 @@ public class BookController {
   public void deleteBook(@RequestHeader(name = "X-AUTH-TOKEN") String token,
       @PathVariable Long bookId) {
     bookService.deleteBook(token, bookId);
+  }
+
+  /**
+   * 도서 조회
+   */
+  @GetMapping("/book/search")
+  public List<BookDto> searchAllBook() {
+    return bookService.searchAllBook();
   }
 }
