@@ -15,7 +15,7 @@ public class JwtProvider {
 
   private final long tokenValidTime = 1000L * 60 * 60 * 24;
 
-  public JwtProvider(@Value("${aes.encryptionKey}") String secretKey) {
+  public JwtProvider(@Value("${encryption.key}") String secretKey) {
     this.secretKey = secretKey;
   }
 

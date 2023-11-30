@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class JwtConfig {
-  @Value("${aes.encryptionKey}")
+  @Value("${encryption.key}")
   private String secretKey;
 
   @Bean
