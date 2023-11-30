@@ -24,11 +24,20 @@ jobs:
         with:
           java-version: 17
 
+      - name: Set Up MySQL
+        uses: samin/mysql-action@v1
+        with:
+          character set server: 'utf8'
+          mysql database: bookmanagement
+          mysql user: ${{ secrets.RDS_USERNAME }}
+          mysql password: ${{ secrets.RDS_PASSWORD }}
+
       - name: Set yaml file
         uses: microsoft/variable-substitution@v1
         with:
           files: ${{ env.RESOURCE_PATH }}
         env:
+          spring.datasource.url: ${{secrets.RDS_URL}}
           spring.datasource.username: ${{ secrets.RDS_USERNAME }}
           spring.datasource.password: ${{ secrets.RDS_PASSWORD }}
           encryption.key: ${{ secrets.CRYPTION_KEY }}
