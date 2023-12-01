@@ -12,6 +12,7 @@ Auth : JWT
 빌드 툴 : Gradle
 API 문서화 : Swagger
 버전 관리 툴 : GitHub
+CI/CD : GitHub Actions
 ```
 
 ## 사용기술
@@ -19,17 +20,18 @@ API 문서화 : Swagger
 <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=Java&logoColor=white"> <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"> <img src="https://img.shields.io/badge/Mybatis-007DB8?style=for-the-badge&logo=Mybatis&logoColor=white">  <img src="https://img.shields.io/badge/JWT-2088FF?style=for-the-badge&logo=JWT&logoColor=white">
 
 ### DB
-<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/amazon s3-569A31?style=for-the-badge&logo=amazons3&logoColor=white">
+<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> <img src="https://img.shields.io/badge/amazon rds-569A31?style=for-the-badge&logo=amazonrds&logoColor=white">
 
 ### DevOps
-<img src="https://img.shields.io/badge/amazon ec2-FF9900?style=for-the-badge&logo=mamazonec2&logoColor=white">  <img src="https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white"> <img src="https://img.shields.io/badge/amazon s3-569A31?style=for-the-badge&logo=amazons3&logoColor=white">
+<img src="https://img.shields.io/badge/amazon ec2-FF9900?style=for-the-badge&logo=mamazonec2&logoColor=white">  <img src="https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white"> <img src="https://img.shields.io/badge/amazon s3-569A31?style=for-the-badge&logo=amazons3&logoColor=white"> <img src="https://img.shields.io/badge/amazon iam-FF9900?style=for-the-badge&logo=mamazoniam&logoColor=white"> <img src="https://img.shields.io/badge/amazon code deploy-FF9900?style=for-the-badge&logo=mamazoncodedeploy&logoColor=white">
 
 
 ## 시스템 구성도
 
--
+-![김우진_AWS구성내역사진](https://github.com/woojkk/BookManagement/assets/122269418/68a36c41-18a7-4494-85d9-adad983427d1)
 
-## 기능 정의서
+
+## 기능 정의
 ### [ 회원 ]
 - 회원 가입
 - 로그인
@@ -53,3 +55,5 @@ API 문서화 : Swagger
 ## ERD
 ![BookManagement ERD](https://github.com/woojkk/BookManagement/assets/122269418/e2e40e83-ad5a-462a-8b82-ed0f34bbd7dc)
 
+
+⚡ [Swagger Url](http://43.201.176.101:8080/swagger-ui/index.html#/)
