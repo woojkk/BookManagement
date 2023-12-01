@@ -5,6 +5,7 @@ import com.woojkk.bookmanagement.service.LoanService;
 import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +20,11 @@ public class LoanController {
 
   @Operation(summary = "도서 대출")
   @PostMapping("/Loan/{bookId}")
-  public void loanBook(@RequestHeader(name = "X-AUTH-TOKEN") String token,
+  public ResponseEntity<String> loanBook(@RequestHeader(name = "X-AUTH-TOKEN") String token,
                        @PathVariable Long bookId) {
     loanService.loanBook(token, bookId);
+
+    return ResponseEntity.ok("도서 대출 완료.");
   }
 
   @Operation(summary = "대출 이력 조회")

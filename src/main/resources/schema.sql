@@ -3,7 +3,7 @@ create table if not exists user (
     nickname varchar(30) not null,
     password varchar(50) not null,
     contact_number varchar(13) not null,
-    role bit(1) not null
+    role tinyint(1) not null
 );
 
 create table if not exists book (

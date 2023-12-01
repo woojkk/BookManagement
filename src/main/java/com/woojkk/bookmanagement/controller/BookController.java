@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,25 +25,31 @@ public class BookController {
   @Operation(summary = "도서 등록")
   @PostMapping("/book")
   @ResponseStatus(HttpStatus.CREATED)
-  public void registrationBook(@RequestHeader(name = "X-AUTH-TOKEN") String token,
+  public ResponseEntity<String> registrationBook(@RequestHeader(name = "X-AUTH-TOKEN") String token,
                                @RequestBody BookDto bookDto) {
 
     bookService.registrationBook(token, bookDto);
+
+    return ResponseEntity.ok("도서 등록 완료.");
   }
 
   @Operation(summary = "도서 수정")
   @PutMapping("/book/{bookId}")
-  public void updatedBook(@RequestHeader(name = "X-AUTH-TOKEN") String token,
+  public ResponseEntity<String> updatedBook(@RequestHeader(name = "X-AUTH-TOKEN") String token,
                           @PathVariable Long bookId,
                           @RequestBody BookDto bookDto) {
     bookService.updateBook(token, bookId, bookDto);
+
+    return ResponseEntity.ok("도서 수정 완료.");
   }
 
   @Operation(summary = "도서 삭제")
   @DeleteMapping("/book/{bookId}")
-  public void deleteBook(@RequestHeader(name = "X-AUTH-TOKEN") String token,
+  public ResponseEntity<String> deleteBook(@RequestHeader(name = "X-AUTH-TOKEN") String token,
       @PathVariable Long bookId) {
     bookService.deleteBook(token, bookId);
+
+    return ResponseEntity.ok("도서 삭제 완료.");
   }
 
   @Operation(summary = "도서 조회")

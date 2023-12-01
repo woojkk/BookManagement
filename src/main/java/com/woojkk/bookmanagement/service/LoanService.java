@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +21,7 @@ public class LoanService {
   private final JwtProvider jwtProvider;
 
 
+  @Transactional
   public void loanBook(String token, Long bookId) {
     if (!jwtProvider.validateToken(token)) {
       throw new RuntimeException("토근 유효기간이 만료되었습니다. 다시 로그인해주세요.");

@@ -42,6 +42,7 @@ public class BookService {
     }
   }
 
+  @Transactional
   public void updateBook(String token, Long bookId, BookDto bookDto) {
     if (!jwtProvider.validateToken(token)) {
       throw new RuntimeException("토근 유효기간이 만료되었습니다. 다시 로그인해주세요.");
@@ -71,6 +72,7 @@ public class BookService {
     return userdto.isRole();
   }
 
+  @Transactional
   public void deleteBook(String token, Long bookId) {
     if (!jwtProvider.validateToken(token)) {
       throw new RuntimeException("토근 유효기간이 만료되었습니다. 다시 로그인해주세요.");
